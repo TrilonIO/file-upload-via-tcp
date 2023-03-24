@@ -26,9 +26,6 @@ export class TcpServerService implements OnModuleInit {
       await mkdir(this.dirPath);
     }
   }
-  private getFilePath(fileName: string): string {
-    return join(this.dirPath, fileName);
-  }
   saveFile(data: File): Observable<{ success: boolean; fileName: string }> {
     const fileName = `${randomUUID()}-${data.fileName}`;
     return writeFile$(this.getFilePath(fileName), data.buffer).pipe(
@@ -55,5 +52,8 @@ export class TcpServerService implements OnModuleInit {
       }, []),
       map((fileNames) => ({ success: true, fileNames })),
     );
+  }
+  private getFilePath(fileName: string): string {
+    return join(this.dirPath, fileName);
   }
 }
