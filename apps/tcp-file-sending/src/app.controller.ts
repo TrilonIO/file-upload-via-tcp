@@ -30,9 +30,9 @@ export class AppController {
     return this.appService.sendFilesToTCP(files);
   }
 
-  @Post('files-slow')
+  @Post('files-one-by-one')
   @UseInterceptors(FilesInterceptor('files'))
   postFilesSlow(@UploadedFiles() files: Express.Multer.File[]) {
-    return this.appService.slowlySendFilesToTCP(files);
+    return this.appService.sendMultipleFilesOneByOne(files);
   }
 }

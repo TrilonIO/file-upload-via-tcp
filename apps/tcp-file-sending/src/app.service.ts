@@ -29,7 +29,9 @@ export class AppService {
     );
   }
 
-  slowlySendFilesToTCP(files: Express.Multer.File[]): Observable<MultiSuccess> {
+  sendMultipleFilesOneByOne(
+    files: Express.Multer.File[],
+  ): Observable<MultiSuccess> {
     return from(files).pipe(
       mergeMap((file) => {
         return this.fileService.send<SingleSuccess>(
